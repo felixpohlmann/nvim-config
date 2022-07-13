@@ -31,7 +31,15 @@ return require('packer').startup(function(use)
 	  'nvim-lualine/lualine.nvim',
   	requires = { 'kyazdani42/nvim-web-devicons', opt = true }
 	}
-
+	
+	--Intend Line 
+	use {
+ 	 "lukas-reineke/indent-blankline.nvim",
+	config = function()
+    	require("indent_blankline").setup { filetype_exclude = { "dashboard" }
+    	}
+  	end
+	}
 	--use {
         --'nvim-treesitter/nvim-treesitter',
         --run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,

@@ -49,6 +49,9 @@ nmap <silent> <c-l> :wincmd l<CR>
 "Map ESC to leave terminal mode
 tnoremap <Esc> <C-\><C-n>
 
+"Create New Line below/above current line and move curser to it
+nnoremap <Leader>O o<Esc>0"_D
+
 "Set <leader> key to spacebar
 let mapleader = " "
 
