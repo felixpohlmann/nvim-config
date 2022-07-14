@@ -2,43 +2,43 @@ lua require("plugins")
 lua require("dashboard-config")
 lua require("nvimtree-config")
 lua require("neoscroll-config")
+lua require("nvimtreesitter-config")
 lua require("gitsigns-config")
 lua require("lualine-config")
 
 "Plug section
 call plug#begin()
-Plug 'dracula/vim', { 'as': 'dracula' } "Dracula Theme
+"Plug 'dracula/vim', { 'as': 'dracula' } "Dracula Theme
+Plug 'neoclide/coc.nvim', {'branch': 'release'} "Code Completion
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim' "Telescope Fuzzy Finder
 Plug 'nvim-telescope/telescope-fzf-native.nvim', {'do':'make'} 
-Plug 'neoclide/coc.nvim', {'branch': 'release'} "Code Completion
 Plug 'chun-yang/auto-pairs' "Auto Closing Brackets
-Plug 'nvim-treesitter/nvim-treesitter' 
 "witouth the two plugs below TreeSitter will not work
 Plug 'maxmellon/vim-jsx-pretty'
-Plug 'pangloss/vim-javascript'
+"Plug 'pangloss/vim-javascript'
 call plug#end()
 
 lua require("telescope-config")
 
+"enable colorscheme
+"colorscheme dracula
 
-"TreeSitter Config
+"Reload Config Function
+" Inside an init.vim file
 lua <<EOF
-require'nvim-treesitter.configs'.setup {
-	ensure_installed = {"javascript","typescript","css","html"}, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-  ignore_install = { "javascript" }, -- List of parsers to ignore installing
-  highlight = {
-    enable = true,              -- false will disable the whole extension
-    disable = { "c", "rust" },  -- list of language that will be disabled
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
-  },
-}
+function _G.ReloadConfig()
+  for name,_ in pairs(package.loaded) do
+    if name:match('^cnull') then
+      package.loaded[name] = nil
+    end
+  end
+
+  dofile(vim.env.MYVIMRC)
+end
 EOF
 
+command! ReloadConfig lua ReloadConfig()
 
 " Use ctrl-[hjkl] to select the active split
 nmap <silent> <c-k> :wincmd k<CR>
@@ -63,6 +63,28 @@ nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+
+" Go to tab by number (vim tab)
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt
+noremap <leader>4 4gt
+noremap <leader>5 5gt
+noremap <leader>6 6gt
+noremap <leader>7 7gt
+noremap <leader>8 8gt
+noremap <leader>9 9gt
+noremap <leader>0 :tablast<cr>
+
+" Create new empty tab
+noremap <leader>t :tabnew<cr>
+
+
+" Go to last active tab (vim-tab)
+au TabLeave * let g:lasttab = tabpagenr()
+nnoremap <silent> <c-l> :exe "tabn ".g:lasttab<cr>
+vnoremap <silent> <c-l> :exe "tabn ".g:lasttab<cr>
+
 
 "CoC example-config from GitHub 
 " Set internal encoding of vim, not needed on neovim, since coc.nvim using some

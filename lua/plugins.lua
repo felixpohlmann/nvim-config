@@ -8,7 +8,13 @@ return require('packer').startup(function(use)
   -- My plugins here
   	--NVIM-DASHBOARD
 	use {'glepnir/dashboard-nvim'}
-	  	
+	
+	use 'navarasu/onedark.nvim'
+	require('onedark').setup {
+	    style = 'darker'
+	}
+	require('onedark').load()
+
 	--NVIMTREE
 	use {
 	  'kyazdani42/nvim-tree.lua',
@@ -40,10 +46,10 @@ return require('packer').startup(function(use)
     	}
   	end
 	}
-	--use {
-        --'nvim-treesitter/nvim-treesitter',
-        --run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
-   	-- }
+	use {
+        'nvim-treesitter/nvim-treesitter',
+        run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
+   	}
 
 	-- Put this at the end after all plugins
  	if packer_bootstrap then
