@@ -16,10 +16,12 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim', {'do':'make'}
 Plug 'chun-yang/auto-pairs' "Auto Closing Brackets
 "witouth the two plugs below TreeSitter will not work
 Plug 'maxmellon/vim-jsx-pretty'
-"Plug 'pangloss/vim-javascript'
+Plug 'norcalli/nvim-colorizer.lua'
+Plug 'pangloss/vim-javascript'
 call plug#end()
 
 lua require("telescope-config")
+lua require("colorizer-config")
 
 "enable colorscheme
 "colorscheme dracula
