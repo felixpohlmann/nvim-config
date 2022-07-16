@@ -81,11 +81,13 @@ noremap <leader>0 :tablast<cr>
 " Create new empty tab
 noremap <leader>t :tabnew<cr>
 
+" Open File Tree
+noremap <leader>b :NvimTreeToggle<cr>
 
 " Go to last active tab (vim-tab)
 au TabLeave * let g:lasttab = tabpagenr()
-nnoremap <silent> <c-l> :exe "tabn ".g:lasttab<cr>
-vnoremap <silent> <c-l> :exe "tabn ".g:lasttab<cr>
+nnoremap <silent> <leader>l :exe "tabn ".g:lasttab<cr>
+vnoremap <silent> <leader>l :exe "tabn ".g:lasttab<cr>
 
 
 "CoC example-config from GitHub 
