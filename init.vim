@@ -12,6 +12,7 @@ call plug#begin()
 "Plug 'dracula/vim', { 'as': 'dracula' } "Dracula Theme
 Plug 'neoclide/coc.nvim', {'branch': 'release'} "Code Completion
 Plug 'nvim-lua/plenary.nvim'
+Plug 'sindrets/diffview.nvim'
 Plug 'nvim-telescope/telescope.nvim' "Telescope Fuzzy Finder
 Plug 'nvim-telescope/telescope-fzf-native.nvim', {'do':'make'} 
 Plug 'chun-yang/auto-pairs' "Auto Closing Brackets
@@ -19,6 +20,7 @@ Plug 'chun-yang/auto-pairs' "Auto Closing Brackets
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'pangloss/vim-javascript'
+Plug 'preservim/nerdcommenter'
 call plug#end()
 
 lua require("telescope-config")

@@ -29,13 +29,6 @@ return require('packer').startup(function(use)
 	--NEOSCROLL
 	use 'karb94/neoscroll.nvim'
 
-	--Commenting plugin
-	use {
-    'numToStr/Comment.nvim',
-    config = function()
-        require('Comment').setup()
-    end
-}
 	--Ping when changing windows or juming long distances
 	use {'edluffy/specs.nvim'}
 	--GitSigns
