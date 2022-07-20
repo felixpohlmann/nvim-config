@@ -1,32 +1,53 @@
-  local home = os.getenv('HOME')
-  local db = require('dashboard')
-  db.preview_command = 'cat | lolcat -F 0.3'
-  db.preview_file_path = home .. '/.config/nvim/static/neovim.cat'
-  db.preview_file_height = 12
-  db.preview_file_width = 80
-  db.custom_center = {
-      {icon = '  ',
-      desc = 'Recently latest session                  ',
-      shortcut = 'SPC s l',
-      action ='SessionLoad'},
-      {icon = '  ',
-      desc = 'Recently opened files                   ',
-      action =  'DashboardFindHistory',
-      shortcut = 'SPC f h'},
-      {icon = '  ',
-      desc = 'Find  File                              ',
-      action = 'Telescope find_files find_command=rg,--hidden,--files',
-      shortcut = 'SPC f f'},
-      {icon = '  ',
-      desc ='File Browser                            ',
-      action =  'Telescope file_browser',
-      shortcut = 'SPC f b'},
-      {icon = '  ',
-      desc = 'Find  word                              ',
-      action = 'Telescope live_grep',
-      shortcut = 'SPC f w'},
-      {icon = '  ',
-      desc = 'Open Personal dotfiles                  ',
-      action = 'Telescope dotfiles path=' .. home ..'/.dotfiles',
-      shortcut = 'SPC f d'},
-    }
+local M = {}
+
+function M.get_sections()
+	local header = {
+		type = "text",
+		val = {
+      [[ _______   _______      ___      .___________. __    __  ____    ____  __  .___  ___.]],
+      [[|       \ |   ____|    /   \     |           ||  |  |  | \   \  /   / |  | |   \/   |]],
+      [[|  .--.  ||  |__      /  ^  \    `---|  |----`|  |__|  |  \   \/   /  |  | |  \  /  |]],
+      [[|  |  |  ||   __|    /  /_\  \       |  |     |   __   |   \      /   |  | |  |\/|  |]],
+      [[|  '--'  ||  |____  /  _____  \      |  |     |  |  |  |    \    /    |  | |  |  |  |]],
+      [[|_______/ |_______|/__/     \__\     |__|     |__|  |__|     \__/     |__| |__|  |__|]],
+		},
+		opts = {
+			position = "center",
+			hl = "Label",
+		},
+	}
+
+	local text = require("dvim.interface.text")
+
+	local footer = {
+		type = "text",
+		val = text.align_center({ width = 0 }, {
+			"",
+			"https://damrah.netlify.app",
+		}, 0.5),
+		opts = {
+			position = "center",
+			hl = "Number",
+		},
+	}
+
+	local buttons = {
+		entries = {
+			{ "f", "  Find file", ":Telescope find_files <CR>" },
+			{ "e", "  New file", ":ene <BAR> startinsert <CR>" },
+			{ "p", "  Find project", ":Telescope projects <CR>" },
+			{ "r", "  Recently used files", ":Telescope oldfiles <CR>" },
+			{ "t", "  Find text", ":Telescope live_grep <CR>" },
+			{ "c", "  Configuration", ":e ~/.config/nvim/init.lua <CR>" },
+			{ "q", "  Quit Neovim", ":qa<CR>" },
+		},
+	}
+
+	return {
+		header = header,
+		buttons = buttons,
+		footer = footer,
+	}
+end
+
+return M

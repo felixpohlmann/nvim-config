@@ -5,6 +5,7 @@ lua require("neoscroll-config")
 lua require("nvimtreesitter-config")
 lua require("gitsigns-config")
 lua require("lualine-config")
+lua require("searchpulse-config")
 
 "Plug section
 call plug#begin()
@@ -52,7 +53,9 @@ nmap <silent> <c-l> :wincmd l<CR>
 tnoremap <Esc> <C-\><C-n>
 
 "Create New Line below/above current line and move curser to it
-nnoremap <Leader>O o<Esc>0"_D
+"nnoremap <Leader>O o<Esc>0"_D
+map <Enter> o<ESC>
+map <S-Enter> O<ESC>
 
 "Set <leader> key to spacebar
 let mapleader = " "
@@ -84,11 +87,12 @@ noremap <leader>t :tabnew<cr>
 " Open File Tree
 noremap <leader>b :NvimTreeToggle<cr>
 
+" Set cursor in normal mode to normal cursor
+let &t_EI = "\e[4 q"
 " Go to last active tab (vim-tab)
 au TabLeave * let g:lasttab = tabpagenr()
 nnoremap <silent> <leader>l :exe "tabn ".g:lasttab<cr>
 vnoremap <silent> <leader>l :exe "tabn ".g:lasttab<cr>
-
 
 "CoC example-config from GitHub 
 " Set internal encoding of vim, not needed on neovim, since coc.nvim using some
@@ -97,6 +101,9 @@ set encoding=utf-8
 
 " TextEdit might fail if hidden is not set.
 set hidden
+
+" let cursor go to end of line
+set virtualedit+=onemore
 
 " Some servers have issues with backup files, see #649.
 set nobackup

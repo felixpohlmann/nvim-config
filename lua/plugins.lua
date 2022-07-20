@@ -28,7 +28,16 @@ return require('packer').startup(function(use)
 
 	--NEOSCROLL
 	use 'karb94/neoscroll.nvim'
-	
+
+	--Commenting plugin
+	use {
+    'numToStr/Comment.nvim',
+    config = function()
+        require('Comment').setup()
+    end
+}
+	--Ping when changing windows or juming long distances
+	use {'edluffy/specs.nvim'}
 	--GitSigns
 	use {'lewis6991/gitsigns.nvim'}
 	
@@ -37,7 +46,13 @@ return require('packer').startup(function(use)
 	  'nvim-lualine/lualine.nvim',
   	requires = { 'kyazdani42/nvim-web-devicons', opt = true }
 	}
-	
+ 	
+	--Better Tabline
+	use {
+ 	 'romgrk/barbar.nvim',
+ 	 requires = {'kyazdani42/nvim-web-devicons'}
+	}
+
 	--Intend Line 
 	use {
  	 "lukas-reineke/indent-blankline.nvim",
