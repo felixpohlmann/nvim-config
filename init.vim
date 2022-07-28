@@ -29,6 +29,34 @@ lua require("colorizer-config")
 "enable colorscheme
 "colorscheme dracula
 
+" enable function key F2
+set <F2>=<C-v><F2>
+
+"keybind to open terminal in current pane
+nnoremap <leader>L :terminal<cr>
+
+"enable autoread to detect file type change
+set autoread
+
+" some intend settings
+":filetype indent on
+":set filetype=html
+:set smartindent 
+:set autoindent
+:set shiftwidth=2
+" Trigger intend of current file
+inoremap <F2> <C-o>gg=G
+
+" Keymap to move lines up and down
+nnoremap ∆ :m .+1<CR>==
+nnoremap º :m .-2<CR>==
+
+inoremap ∆ <Esc>:m .+1<CR>==gi
+inoremap º <Esc>:m .-2<CR>==gi
+
+vnoremap ∆ :m '>+1<CR>gv=gv
+vnoremap º :m '<-2<CR>gv=gv
+
 "Reload Config Function
 " Inside an init.vim file
 lua <<EOF
@@ -95,6 +123,8 @@ let &t_EI = "\e[4 q"
 au TabLeave * let g:lasttab = tabpagenr()
 nnoremap <silent> <leader>l :exe "tabn ".g:lasttab<cr>
 vnoremap <silent> <leader>l :exe "tabn ".g:lasttab<cr>
+
+
 
 "CoC example-config from GitHub 
 " Set internal encoding of vim, not needed on neovim, since coc.nvim using some

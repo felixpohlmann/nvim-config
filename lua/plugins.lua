@@ -23,6 +23,14 @@ return require('packer').startup(function(use)
  		 },
   		tag = 'nightly' -- optional, updated every week. (see issue #1193)
 	}
+
+	--Lines showing lsp suggestions and information
+	use({
+	 "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+	   config = function()
+	require("lsp_lines").setup()
+	 end,
+	})
 	--BUFFERLINE (top line) (deactivated right now)
 	--use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
 
@@ -39,7 +47,10 @@ return require('packer').startup(function(use)
 	  'nvim-lualine/lualine.nvim',
   	requires = { 'kyazdani42/nvim-web-devicons', opt = true }
 	}
- 	
+
+	--Glow nvim integration (see markdown preview)
+ 	use {"ellisonleao/glow.nvim"}
+
 	--Better Tabline
 	use {
  	 'romgrk/barbar.nvim',
