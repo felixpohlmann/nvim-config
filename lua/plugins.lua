@@ -16,7 +16,8 @@ return require('packer').startup(function(use)
 	}
 	require('onedark').load()
 
-
+	-- Tim Pope Surround
+	use 'tpope/vim-surround'
 
 	--NVIMTREE
 	use {
