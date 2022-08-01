@@ -21,16 +21,36 @@ Plug 'maxmellon/vim-jsx-pretty'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'pangloss/vim-javascript'
 Plug 'preservim/nerdcommenter'
+Plug 'akinsho/toggleterm.nvim', {'tag' : 'v2.1.0'}
+Plug 'Kachyz/vim-gitmoji'
+
 call plug#end()
 
 lua require("telescope-config")
 lua require("colorizer-config")
+lua require("toggleterm-config")
 
 "enable colorscheme
 "colorscheme dracula
 
+"enable emoji completion
+set completefunc=emoji#complete
+
+"treat json as jsonc (allow comments in json files)
+augroup JsonToJsonc
+    autocmd! FileType json set filetype=jsonc
+augroup END
+
 " enable function key F2
 set <F2>=<C-v><F2>
+
+"mappings for toggleterm.nvim
+" set
+autocmd TermEnter term://*toggleterm#*
+      \ tnoremap <silent><c-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>
+
+nnoremap <silent><c-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>
+inoremap <silent><c-t> <Esc><Cmd>exe v:count1 . "ToggleTerm"<CR>
 
 "keybind to open terminal in current pane
 nnoremap <leader>L :terminal<cr>

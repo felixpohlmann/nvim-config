@@ -1,53 +1,70 @@
-local M = {}
+local dashboard = require("dashboard")
 
-function M.get_sections()
-	local header = {
-		type = "text",
-		val = {
-      [[ _______   _______      ___      .___________. __    __  ____    ____  __  .___  ___.]],
-      [[|       \ |   ____|    /   \     |           ||  |  |  | \   \  /   / |  | |   \/   |]],
-      [[|  .--.  ||  |__      /  ^  \    `---|  |----`|  |__|  |  \   \/   /  |  | |  \  /  |]],
-      [[|  |  |  ||   __|    /  /_\  \       |  |     |   __   |   \      /   |  | |  |\/|  |]],
-      [[|  '--'  ||  |____  /  _____  \      |  |     |  |  |  |    \    /    |  | |  |  |  |]],
-      [[|_______/ |_______|/__/     \__\     |__|     |__|  |__|     \__/     |__| |__|  |__|]],
-		},
-		opts = {
-			position = "center",
-			hl = "Label",
-		},
-	}
 
-	local text = require("dvim.interface.text")
-
-	local footer = {
-		type = "text",
-		val = text.align_center({ width = 0 }, {
-			"",
-			"https://damrah.netlify.app",
-		}, 0.5),
-		opts = {
-			position = "center",
-			hl = "Number",
-		},
-	}
-
-	local buttons = {
-		entries = {
-			{ "f", "  Find file", ":Telescope find_files <CR>" },
-			{ "e", "  New file", ":ene <BAR> startinsert <CR>" },
-			{ "p", "  Find project", ":Telescope projects <CR>" },
-			{ "r", "  Recently used files", ":Telescope oldfiles <CR>" },
-			{ "t", "  Find text", ":Telescope live_grep <CR>" },
-			{ "c", "  Configuration", ":e ~/.config/nvim/init.lua <CR>" },
-			{ "q", "  Quit Neovim", ":qa<CR>" },
-		},
-	}
-
-	return {
-		header = header,
-		buttons = buttons,
-		footer = footer,
-	}
+local function repeat_str (str, times)
+	return times > 0 and str..repeat_str(str, times-1) or ""
 end
 
-return M
+
+local empty_line = [[]]
+local header = {
+	empty_line,
+	[[███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗]],
+	[[████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║]],
+	[[██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║]],
+	[[██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║]],
+	[[██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║]],
+	[[╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝]],
+	empty_line
+}
+
+local splash = vim.fn.system("gshuf -n 1 "..vim.fn.stdpath("config").."/splashes"):sub(1,-2).."!"
+local padding = (#header[#header] - #splash) / 2 - 2
+splash = repeat_str(" ", padding).."[ "..splash.." ]"
+
+-- Add the splash string followed by two empty lines
+table.insert(header, splash)
+table.insert(header, empty_line)
+table.insert(header, empty_line)
+table.insert(header, empty_line)
+
+
+dashboard.custom_header  = header
+dashboard.custom_center = {
+	{
+		icon = "  ",
+		desc = "New file                               ",
+		shortcut = ":enew",
+		action = "enew",
+	},
+	{
+		icon = "  ",
+		desc = "Find file                              ",
+		shortcut = "SPC f",
+		action = "Telescope find_files hidden=true no_ignore=true",
+	},
+	{
+		icon = "  ",
+		desc = "Browse dotfiles                        ",
+		shortcut = "SPC v d",
+		action = "Telescope find_files cwd=~/.config/nvim/ search_dirs=Ultisnips,lua,viml,init.vim",
+	},
+	{
+		icon = "  ",
+		desc = "Update plugins                         ",
+		shortcut = ":PackerSync",
+		action = "PackerSync",
+	},
+	{
+		icon = "  ",
+		desc = "Open floating terminal                 ",
+		shortcut = "SPC t t",
+		action = "FloatermToggle",
+	},
+	{
+		icon = "  ",
+		desc = "Close neovim                           ",
+		shortcut = ":qa!",
+		action = "qa!",
+	},
+}
