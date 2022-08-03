@@ -19,6 +19,9 @@ return require('packer').startup(function(use)
 	-- Tim Pope Surround
 	use 'tpope/vim-surround'
 
+	-- Tim Pope Fugitive
+	use 'tpope/vim-fugitive'
+
 	--NVIMTREE
 	use {
 	'kyazdani42/nvim-tree.lua',

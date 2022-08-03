@@ -18,12 +18,10 @@ local header = {
 	empty_line
 }
 
-local splash = vim.fn.system("gshuf -n 1 "..vim.fn.stdpath("config").."/splashes"):sub(1,-2).."!"
-local padding = (#header[#header] - #splash) / 2 - 2
-splash = repeat_str(" ", padding).."[ "..splash.." ]"
+
+
 
 -- Add the splash string followed by two empty lines
-table.insert(header, splash)
 table.insert(header, empty_line)
 table.insert(header, empty_line)
 table.insert(header, empty_line)

@@ -113,6 +113,9 @@ let mapleader = " "
 "Activate line numbers
 set number
 
+"KeyMap to launch lazygit using toggleterm floating terminal
+nnoremap <leader>g <cmd>lua _lazygit_toggle()<CR>
+
 "Telescope Key Mapping
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
