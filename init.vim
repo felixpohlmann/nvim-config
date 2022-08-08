@@ -1,3 +1,4 @@
+"Luading lua configs
 lua require("plugins")
 lua require("dashboard-config")
 lua require("nvimtree-config")
@@ -6,6 +7,7 @@ lua require("nvimtreesitter-config")
 lua require("gitsigns-config")
 lua require("lualine-config")
 lua require("searchpulse-config")
+lua require("indentline-config")
 
 "Plug section
 call plug#begin()

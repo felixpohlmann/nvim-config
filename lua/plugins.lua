@@ -64,7 +64,10 @@ return require('packer').startup(function(use)
  	 requires = {'kyazdani42/nvim-web-devicons'}
 	}
 
-	--Intend Line 
+	--Intend Line
+	vim.opt.list = true
+	vim.opt.listchars:append "space:⋅"
+	vim.opt.listchars:append "eol:↴"
 	use {
  	 "lukas-reineke/indent-blankline.nvim",
 	config = function()
