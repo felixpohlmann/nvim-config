@@ -67,6 +67,9 @@ set autoread
 " Trigger intend of current file
 inoremap <F2> <C-o>gg=G
 
+" mapping esc to :nsh to remove search highlighting after search
+map <esc> :noh <CR>
+
 " Keymap to move lines up and down
 nnoremap ∆ :m .+1<CR>==
 nnoremap º :m .-2<CR>==
